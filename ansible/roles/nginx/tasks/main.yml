@@ -1,0 +1,68 @@
+---
+# Install Nginx and configure as reverse proxy
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Remove default Nginx site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Deploy Nginx reverse proxy config
+  copy:
+    content: |
+      server {
+          listen 80;
+          server_name _;
+
+          location / {
+              proxy_pass http://127.0.0.1:3000;
+              proxy_http_version 1.1;
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_read_timeout 90;
+          }
+
+          location /nginx-health {
+              return 200 "nginx ok";
+              add_header Content-Type text/plain;
+          }
+      }
+    dest: /etc/nginx/sites-available/cicd-api
+    mode: '0644'
+
+- name: Enable the site
+  file:
+    src: /etc/nginx/sites-available/cicd-api
+    dest: /etc/nginx/sites-enabled/cicd-api
+    state: link
+
+- name: Test Nginx configuration
+  command: nginx -t
+  register: nginx_test
+  changed_when: false
+
+- name: Restart Nginx
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+
+- name: Verify Nginx is running
+  uri:
+    url: "http://localhost"
+    status_code: 200
+  register: nginx_check
+  retries: 5
+  delay: 2
+  until: nginx_check.status == 200
+
+- name: Print result
+  debug:
+    msg: "Nginx reverse proxy is live"

@@ -1,0 +1,51 @@
+---
+# Fast deployment playbook — used by Jenkins pipeline
+# Assumes Docker and Nginx are already installed (done once via playbook.yml)
+
+- name: Deploy Latest Image
+  hosts: app_server
+  become: yes
+
+  vars:
+    docker_image: "satvik55/cicd-api"
+    docker_tag: "latest"
+    container_name: "cicd-api"
+
+  tasks:
+    - name: Pull latest Docker image
+      docker_image:
+        name: "{{ docker_image }}"
+        tag: "{{ docker_tag }}"
+        source: pull
+        force_source: yes
+
+    - name: Stop existing container
+      docker_container:
+        name: "{{ container_name }}"
+        state: absent
+      ignore_errors: yes
+
+    - name: Run new container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ docker_image }}:{{ docker_tag }}"
+        state: started
+        restart_policy: unless-stopped
+        ports:
+          - "3000:3000"
+        env:
+          NODE_ENV: "production"
+          PORT: "3000"
+
+    - name: Wait for app to be healthy
+      uri:
+        url: "http://localhost:3000/health"
+        status_code: 200
+      register: health
+      retries: 10
+      delay: 3
+      until: health.status == 200
+
+    - name: Deployment result
+      debug:
+        msg: "Deployed {{ docker_image }}:{{ docker_tag }} — app healthy"

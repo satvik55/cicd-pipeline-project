@@ -1,0 +1,56 @@
+---
+# Main deployment playbook
+# Runs against the app server to deploy the full stack
+
+- name: Deploy CI/CD Pipeline Application
+  hosts: app_server
+  become: yes
+
+  vars:
+    docker_image: "satvik55/cicd-api"
+    docker_tag: "latest"
+    container_name: "cicd-api"
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install Python Docker module (required by Ansible docker modules)
+      pip:
+        name: docker
+        state: present
+      ignore_errors: yes
+
+    - name: Install pip if missing
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install Python Docker module (retry after pip install)
+      pip:
+        name: docker
+        state: present
+
+  roles:
+    - docker
+    - app-deploy
+    - nginx
+
+  post_tasks:
+    - name: Final verification — app via Nginx
+      uri:
+        url: "http://localhost"
+        status_code: 200
+      register: final_check
+
+    - name: Deployment complete
+      debug:
+        msg: |
+          ============================================
+          Deployment Successful!
+          App running at: http://\{\{ ansible_host }}
+          Health check: http://\{\{ ansible_host }}/health
+          Docker image: {{ docker_image }}:{{ docker_tag }}
+          ============================================
