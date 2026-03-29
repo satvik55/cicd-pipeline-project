@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5F5E5A"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="900" height="700" fill="#f7f7f5"/>
+  <text x="450" y="38" text-anchor="middle" font-size="20" font-weight="600" fill="#1a1a2e" letter-spacing="-0.3">CI/CD pipeline architecture</text>
+  <text x="450" y="58" text-anchor="middle" font-size="12" fill="#888">Jenkins + Docker + Terraform + Ansible on AWS</text>
+  <rect x="30" y="80" width="140" height="56" rx="10" fill="#6c5ce7" filter="url(#shadow)"/>
+  <text x="100" y="104" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Developer</text>
+  <text x="100" y="122" text-anchor="middle" fill="#c8bfff" font-size="10">git push</text>
+  <line x1="170" y1="108" x2="210" y2="108" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="215" y="80" width="140" height="56" rx="10" fill="#24292e" filter="url(#shadow)"/>
+  <text x="285" y="104" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">GitHub</text>
+  <text x="285" y="122" text-anchor="middle" fill="#8b949e" font-size="10">Webhook trigger</text>
+  <line x1="355" y1="108" x2="395" y2="108" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="400" y="80" width="270" height="56" rx="10" fill="#0F6E56" filter="url(#shadow)"/>
+  <text x="535" y="104" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Jenkins server</text>
+  <text x="535" y="122" text-anchor="middle" fill="#9FE1CB" font-size="10">t3.small — 13.126.223.204:8080</text>
+  <line x1="535" y1="136" x2="535" y2="168" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="30" y="170" width="840" height="290" rx="14" fill="none" stroke="#0F6E56" stroke-width="1" stroke-dasharray="6 3" opacity="0.4"/>
+  <text x="450" y="196" text-anchor="middle" font-size="14" font-weight="600" fill="#0F6E56">Jenkins pipeline — 8 stages</text>
+  <rect x="60" y="215" width="160" height="48" rx="8" fill="#27ae60" filter="url(#shadow)"/>
+  <text x="140" y="244" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">1. Checkout</text>
+  <line x1="220" y1="239" x2="258" y2="239" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="263" y="215" width="160" height="48" rx="8" fill="#27ae60" filter="url(#shadow)"/>
+  <text x="343" y="244" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">2. Install deps</text>
+  <line x1="423" y1="239" x2="461" y2="239" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="466" y="215" width="160" height="48" rx="8" fill="#27ae60" filter="url(#shadow)"/>
+  <text x="546" y="236" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">3. Run tests</text>
+  <text x="546" y="252" text-anchor="middle" fill="#c8f7c5" font-size="10">15 Jest tests</text>
+  <line x1="546" y1="263" x2="546" y2="283" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="60" y="288" width="160" height="48" rx="8" fill="#2980b9" filter="url(#shadow)"/>
+  <text x="140" y="308" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">4. Docker build</text>
+  <text x="140" y="324" text-anchor="middle" fill="#bee5eb" font-size="10">Multi-stage ~120MB</text>
+  <line x1="220" y1="312" x2="258" y2="312" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="263" y="288" width="160" height="48" rx="8" fill="#c0392b" filter="url(#shadow)"/>
+  <text x="343" y="308" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">5. Trivy scan</text>
+  <text x="343" y="324" text-anchor="middle" fill="#fadbd8" font-size="10">Strict — blocks CRITICALs</text>
+  <line x1="423" y1="312" x2="461" y2="312" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="466" y="288" width="160" height="48" rx="8" fill="#2980b9" filter="url(#shadow)"/>
+  <text x="546" y="308" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">6. Docker push</text>
+  <text x="546" y="324" text-anchor="middle" fill="#bee5eb" font-size="10">DockerHub registry</text>
+  <line x1="140" y1="336" x2="140" y2="358" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="60" y="362" width="160" height="48" rx="8" fill="#e67e22" filter="url(#shadow)"/>
+  <text x="140" y="382" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">7. Deploy</text>
+  <text x="140" y="398" text-anchor="middle" fill="#fef9e7" font-size="10">SSH via VPC private IP</text>
+  <line x1="220" y1="386" x2="258" y2="386" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="263" y="362" width="160" height="48" rx="8" fill="#27ae60" filter="url(#shadow)"/>
+  <text x="343" y="382" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">8. Post-deploy verify</text>
+  <text x="343" y="398" text-anchor="middle" fill="#c8f7c5" font-size="10">Nginx health check</text>
+  <line x1="423" y1="386" x2="461" y2="386" stroke="#5F5E5A" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="466" y="362" width="250" height="48" rx="8" fill="#8e44ad" filter="url(#shadow)" stroke-dasharray="4"/>
+  <text x="591" y="382" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Build summary + cleanup</text>
+  <text x="591" y="398" text-anchor="middle" fill="#e8d5f5" font-size="10">Prune images + cleanWs</text>
+  <path d="M546 336 L546 425 L770 495" fill="none" stroke="#0db7ed" stroke-width="1.2" stroke-dasharray="5" marker-end="url(#arrow)"/>
+  <text x="660" y="440" font-size="10" fill="#0a9fd4" text-anchor="middle">Push image</text>
+  <rect x="700" y="500" width="170" height="52" rx="10" fill="#0db7ed" filter="url(#shadow)"/>
+  <text x="785" y="522" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">DockerHub</text>
+  <text x="785" y="538" text-anchor="middle" fill="#e0f7ff" font-size="10">satvik55/cicd-api</text>
+  <path d="M140 410 L140 570" fill="none" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="5" marker-end="url(#arrow)"/>
+  <text x="155" y="500" font-size="10" fill="#b7950b">SSH deploy</text>
+  <rect x="30" y="575" width="650" height="110" rx="14" fill="#fff3e0" stroke="#ffcc80" stroke-width="1"/>
+  <text x="355" y="600" text-anchor="middle" font-size="14" font-weight="600" fill="#e65100">App server — t3.micro — 3.109.171.228</text>
+  <rect x="60" y="615" width="140" height="52" rx="8" fill="#ff9800" filter="url(#shadow)"/>
+  <text x="130" y="637" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Nginx :80</text>
+  <text x="130" y="653" text-anchor="middle" fill="#fff8e1" font-size="10">Reverse proxy</text>
+  <line x1="200" y1="641" x2="238" y2="641" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="243" y="615" width="180" height="52" rx="8" fill="#2196f3" filter="url(#shadow)"/>
+  <text x="333" y="637" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Docker container :3000</text>
+  <text x="333" y="653" text-anchor="middle" fill="#e3f2fd" font-size="10">cicd-api:BUILD-SHA</text>
+  <line x1="423" y1="641" x2="461" y2="641" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="466" y="615" width="160" height="52" rx="8" fill="#4caf50" filter="url(#shadow)"/>
+  <text x="546" y="637" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Node.js API</text>
+  <text x="546" y="653" text-anchor="middle" fill="#e8f5e9" font-size="10">Express.js v1.2.0</text>
+  <rect x="730" y="615" width="130" height="52" rx="10" fill="#9c27b0" filter="url(#shadow)"/>
+  <text x="795" y="637" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Users</text>
+  <text x="795" y="653" text-anchor="middle" fill="#f3e5f5" font-size="10">HTTP :80</text>
+  <line x1="728" y1="641" x2="690" y2="641" stroke="#9c27b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+</svg>
