@@ -1,0 +1,12 @@
+# Trivy ignore file — known CVEs in base image that we accept
+# Format: one CVE ID per line
+# Add CVEs here ONLY after reviewing them and confirming they don't affect your app
+
+# Example (uncomment if needed):
+# CVE-2023-XXXXX
+CVE-2025-15467
+CVE-2025-69419
+CVE-2025-69421
+CVE-2025-15467
+CVE-2025-69419
+CVE-2025-69421

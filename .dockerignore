@@ -1,0 +1,36 @@
+# Dependencies — will be installed fresh inside container
+node_modules
+app/node_modules
+
+# Test output
+coverage
+
+# Environment files — secrets should never be in images
+.env
+.env.*
+
+# Git
+.git
+.gitignore
+
+# Documentation (not needed in production image)
+*.md
+docs/
+LICENSE
+
+# Terraform, Ansible, Jenkins (not part of the app)
+terraform/
+ansible/
+jenkins/
+scripts/
+nginx/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docker files (no need to put docker config inside the image)
+docker/docker-compose.yml
+docker/.dockerignore
