@@ -4,7 +4,7 @@
 
 ## Project Overview
 
-End-to-end CI/CD pipeline that automatically builds, tests, scans, and deploys a Node.js REST API to AWS EC2 using industry-standard DevOps tools.
+> 🚀 End-to-end DevOps project demonstrating automated CI/CD, infrastructure as code, and production deployment on AWS — built from scratch in 21 days.
 
 ## Final Outcome (What This Project Proves)
 
@@ -22,7 +22,7 @@ Push to GitHub → Jenkins triggers → Tests → Trivy scan
 ```
 
 **Live DockerHub Image:** [satvik55/cicd-api](https://hub.docker.com/r/satvik55/cicd-api)
-> Note: Docker image name retained as `cicd-api` for compatibility.
+> Note: Docker image name retained as `cicd-api` for backward compatibility with existing pipeline configuration.
 ---
 
 ## Key Features
@@ -187,7 +187,13 @@ Push to GitHub → Jenkins triggers → Tests → Trivy scan
 - [x] Day 12: Bash utility scripts (health check, cleanup)
 - [x] Day 13: Final fixes + edge cases + pipeline polish
 - [x] Day 14: Week 2 review & final cleanup
-- [ ] Day 15–21: Documentation, diagrams, resume polish
+- [x] Day 15: Architecture diagrams + screenshots
+- [x] Day 16: README rewrite (recruiter-ready)
+- [x] Day 17: Terraform destroy + recreate test
+- [x] Day 18: Demo recording + final polish
+- [x] Day 19: LinkedIn + resume + interview prep
+- [x] Day 20: Resume polish + GitHub pin + pitch practice
+- [x] Day 21: Final teardown + project completion
 
 ---
 
@@ -535,3 +541,17 @@ asciinema, Node.js, Jenkins, AWS EC2
 
 **Outcome:**
 Project is fully polished, reproducible, and demo-ready. Recruiters can quickly understand the workflow through a real execution recording.
+
+---
+
+## Day 19 — Resume, GitHub Profile & Interview Prep
+
+**Built:**
+Updated the project name across resume and GitHub to “AutoDeploy API — Secure Deployment System on AWS” and fixed the repository link. Refined resume bullets to clearly explain the pipeline and impact. Created a GitHub profile README (`satvik55` repo) to showcase skills, certifications, and key projects. Practiced explaining the project in a simple 2-minute flow and prepared answers for common DevOps interview questions.
+
+**Tools:**
+GitHub (profile README), Markdown, Resume editing
+
+**Outcome:**
+Everything is now clean and presentable — resume, GitHub, and project explanation are aligned and easy to understand for interviews.
+
